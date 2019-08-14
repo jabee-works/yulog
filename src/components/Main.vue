@@ -2,46 +2,21 @@
   <main>
     <article>
       <Sidebar />
-      <section>
+      <section id="contents">
         <h1>title</h1>
         <div>
-          contents<br>
-          contents<br>
-          contents<br>
-          contents<br>
-          contents<br>
-          contents<br>
-          contents<br>
-          contents<br>
-          contents<br>
-          contents<br>
-          contents<br>
-          contents<br>
-          contents<br>
-          contents<br>
-          contents<br>
-          contents<br>
-          contents<br>
-          contents<br>
-          contents<br>
-          contents<br>
-          contents<br>
-          contents<br>
-          contents<br>
-          contents<br>
-          contents<br>
-          contents<br>
-          contents<br>
-          contents<br>
+
           <Photo />
         </div>
       </section>
+      <Home />
     </article>
   </main>
 </template>
 
 <script>
 import Sidebar from './Sidebar.vue'
+import Home from './Home.vue'
 import Photo from './Photo.vue'
 export default {
   name: 'Main',
@@ -50,6 +25,7 @@ export default {
   },
   components: {
     Sidebar,
+    Home,
     Photo
   }
 }
@@ -61,6 +37,11 @@ main {
   background-color:#574b75;
   /* padding: 20px; */
   color: white;
+  text-align: left;
+}
+#contents {
+  width: 1200px;
+  margin: 0 auto;
 }
 h1 {
   font-size: 2em;

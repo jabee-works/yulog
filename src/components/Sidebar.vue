@@ -1,11 +1,11 @@
 <template>
   <section>
     <ul>
-      <li><span>menu1</span></li>
-      <li><span>menu2</span></li>
-      <li><span>menu3</span></li>
-      <li><span>menu4</span></li>
-      <li><span>menu5</span></li>
+      <li><span>Home</span></li>
+      <li><span>Profile</span></li>
+      <li><span>Gallery</span></li>
+      <li><span>Art</span></li>
+      <li><span>Contact</span></li>
     </ul>
     <div class="clear"></div>
   </section>
@@ -64,7 +64,12 @@ ul li span {
   background: #183b58;
   color: #fff;
   padding: 5px;
-  border: 1px solid;
+  border: 1px solid rgb(10, 10, 41);
+  cursor: pointer;
+}
+ul li span:hover {
+  background: #2b79b9;
+  transition: .5s;
 }
 .clear {
   clear: both;

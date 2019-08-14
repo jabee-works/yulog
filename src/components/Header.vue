@@ -1,6 +1,6 @@
 <template>
   <header>
-    <h1>Yulog</h1>
+    <h1>Jabee Works</h1>
   </header>
 </template>
 
