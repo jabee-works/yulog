@@ -1,11 +1,11 @@
 <template>
   <section>
     <ul>
-      <li><span>Home</span></li>
-      <li><span>Profile</span></li>
-      <li><span>Gallery</span></li>
-      <li><span>Art</span></li>
-      <li><span>Contact</span></li>
+      <li v-on:click="change('Home')"><span>Home</span></li>
+      <li v-on:click="change('Profile')"><span>Profile</span></li>
+      <li v-on:click="change('Photo')"><span>Photo</span></li>
+      <li v-on:click="change('Art')"><span>Art</span></li>
+      <li v-on:click="change('Contact')"><span>Contact</span></li>
     </ul>
     <div class="clear"></div>
   </section>
@@ -21,6 +21,7 @@ export default {
     return {
       scrollY: 0,
       fixedHeight: 135,
+      isActive: "Home"
     }
   },
   mounted() {
@@ -34,6 +35,10 @@ export default {
         if(this.scrollY > this.fixedHeight) {
           document.getElementsByTagName("ul")[0].classList.add("fixed");
         }
+    },
+    change(tab) {
+      this.isActive = tab;
+      this.$emit('changetab', this.isActive);
     }
   }
 }
@@ -66,6 +71,7 @@ ul li span {
   padding: 5px;
   border: 1px solid rgb(10, 10, 41);
   cursor: pointer;
+  transition: .5s;
 }
 ul li span:hover {
   background: #2b79b9;

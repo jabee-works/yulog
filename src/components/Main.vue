@@ -1,15 +1,15 @@
 <template>
   <main>
     <article>
-      <Sidebar />
+      <Sidebar @changetab="changetab" />
       <section id="contents">
-        <h1>title</h1>
-        <div>
-
-          <Photo />
-        </div>
+        <Home v-if="activeName === 'Home'" />
+        <Profile v-if="activeName === 'Profile'" />
+        <Photo v-if="activeName === 'Photo'" />
+        <Art v-if="activeName === 'Art'" />
+        <Contact v-if="activeName === 'Contact'" />
       </section>
-      <Home />
+
     </article>
   </main>
 </template>
@@ -17,17 +17,33 @@
 <script>
 import Sidebar from './Sidebar.vue'
 import Home from './Home.vue'
+import Profile from './Profile.vue'
 import Photo from './Photo.vue'
+import Art from './Art.vue'
+import Contact from './Contact.vue'
 export default {
   name: 'Main',
   props: {
     msg: String
   },
+  data: function() {
+    return {
+      activeName: "Home"
+    }
+  },
   components: {
     Sidebar,
     Home,
-    Photo
-  }
+    Profile,
+    Photo,
+    Art,
+    Contact
+  },
+  methods: {
+    changetab: function(name) {
+      this.activeName = name;
+    }
+  },
 }
 </script>
 
@@ -43,9 +59,5 @@ main {
   width: 1200px;
   margin: 0 auto;
 }
-h1 {
-  font-size: 2em;
-  margin: 0;
-  padding-top: 1.5em;
-}
+
 </style>
