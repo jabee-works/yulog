@@ -1,8 +1,10 @@
 <template>
-  <section>
-    <h1>Contact</h1>
+  <article>
+    <section>
+      <h1>Contact</h1>
 
-  </section>
+    </section>
+  </article>
 </template>
 
 <script>

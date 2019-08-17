@@ -4,7 +4,7 @@
       <li v-on:click="change('Home')"><span>Home</span></li>
       <li v-on:click="change('Profile')"><span>Profile</span></li>
       <li v-on:click="change('Photo')"><span>Photo</span></li>
-      <li v-on:click="change('Art')"><span>Art</span></li>
+      <li v-on:click="change('Blog')"><span>Blog</span></li>
       <li v-on:click="change('Contact')"><span>Contact</span></li>
     </ul>
     <div class="clear"></div>

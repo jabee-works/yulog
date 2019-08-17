@@ -1,8 +1,14 @@
 <template>
-  <section>
-    <h1>Photo</h1>
-
-  </section>
+  <article>
+    <section>
+      <h1>Photo</h1>
+    </section>
+    <section>
+      <ul>
+        <li>aaa</li>
+      </ul>
+    </section>
+  </article>
 </template>
 
 <script>
@@ -20,5 +26,8 @@ h1 {
   font-size: 2em;
   margin: 0;
   padding-top: 1.5em;
+}
+ul {
+  margin: 0;
 }
 </style>
