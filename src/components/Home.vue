@@ -1,12 +1,8 @@
 <template>
-  <article>
-    <section>
-      <h1>Home</h1>
-    </section>
-    <section class="contents">
-      HomeHomeHome
-    </section>
-  </article>
+  <section>
+    <h1>Home</h1>
+
+  </section>
 </template>
 
 <script>
@@ -24,8 +20,5 @@ h1 {
   font-size: 2em;
   margin: 0;
   padding-top: 1.5em;
-}
-section.contents {
-  height: 200px;
 }
 </style>

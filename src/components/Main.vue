@@ -1,13 +1,16 @@
 <template>
   <main>
-    <article id="menu">
+    <article>
       <Sidebar @changetab="changetab" />
+      <section id="contents">
+        <Home v-if="activeName === 'Home'" />
+        <Profile v-if="activeName === 'Profile'" />
+        <Photo v-if="activeName === 'Photo'" />
+        <Art v-if="activeName === 'Art'" />
+        <Contact v-if="activeName === 'Contact'" />
+      </section>
+
     </article>
-    <Home v-if="activeName === 'Home'" />
-    <Profile v-if="activeName === 'Profile'" />
-    <Photo v-if="activeName === 'Photo'" />
-    <Blog v-if="activeName === 'Blog'" />
-    <Contact v-if="activeName === 'Contact'" />
   </main>
 </template>
 
@@ -16,7 +19,7 @@ import Sidebar from './Sidebar.vue'
 import Home from './Home.vue'
 import Profile from './Profile.vue'
 import Photo from './Photo.vue'
-import Blog from './Blog.vue'
+import Art from './Art.vue'
 import Contact from './Contact.vue'
 export default {
   name: 'Main',
@@ -33,7 +36,7 @@ export default {
     Home,
     Profile,
     Photo,
-    Blog,
+    Art,
     Contact
   },
   methods: {
@@ -52,7 +55,7 @@ main {
   color: white;
   text-align: left;
 }
-main >>> article:not(#menu) {
+#contents {
   width: 1200px;
   margin: 0 auto;
 }

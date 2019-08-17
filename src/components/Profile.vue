@@ -1,10 +1,8 @@
 <template>
-  <article>
-    <section>
-      <h1>Profile</h1>
+  <section>
+    <h1>Profile</h1>
 
-    </section>
-  </article>
+  </section>
 </template>
 
 <script>

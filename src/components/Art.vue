@@ -1,21 +1,18 @@
 <template>
-  <article>
-    <section>
-      <h1>Blog</h1>
-      <div id="blog"></div>
-    </section>
-  </article>
+  <section>
+    <h1>Art</h1>
+
+  </section>
 </template>
 
 <script>
 export default {
-  name: 'Blog',
+  name: 'Art',
   props: {
     msg: String
   }
 }
 </script>
-
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
