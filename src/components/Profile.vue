@@ -2,7 +2,7 @@
   <article>
     <section>
       <h1>Profile</h1>
-      <div>Imamichi.m</div>
+
     </section>
   </article>
 </template>
