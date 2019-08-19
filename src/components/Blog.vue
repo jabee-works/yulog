@@ -1,13 +1,13 @@
 <template>
   <section>
-    <h1>Art</h1>
+    <h1>Blog</h1>
 
   </section>
 </template>
 
 <script>
 export default {
-  name: 'Art',
+  name: 'Blog',
   props: {
     msg: String
   }

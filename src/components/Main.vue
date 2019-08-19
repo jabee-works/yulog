@@ -6,7 +6,7 @@
         <Home v-if="activeName === 'Home'" />
         <Profile v-if="activeName === 'Profile'" />
         <Photo v-if="activeName === 'Photo'" />
-        <Art v-if="activeName === 'Art'" />
+        <Blog v-if="activeName === 'Blog'" />
         <Contact v-if="activeName === 'Contact'" />
       </section>
 
@@ -19,7 +19,7 @@ import Sidebar from './Sidebar.vue'
 import Home from './Home.vue'
 import Profile from './Profile.vue'
 import Photo from './Photo.vue'
-import Art from './Art.vue'
+import Blog from './Blog.vue'
 import Contact from './Contact.vue'
 export default {
   name: 'Main',
@@ -36,7 +36,7 @@ export default {
     Home,
     Profile,
     Photo,
-    Art,
+    Blog,
     Contact
   },
   methods: {
