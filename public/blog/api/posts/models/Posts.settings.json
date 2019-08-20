@@ -1,0 +1,26 @@
+{
+  "connection": "default",
+  "collectionName": "posts",
+  "info": {
+    "name": "posts",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "comment": ""
+  },
+  "attributes": {
+    "タイトル": {
+      "type": "string"
+    },
+    "テキスト": {
+      "type": "text"
+    },
+    "画像": {
+      "model": "file",
+      "via": "related",
+      "plugin": "upload"
+    }
+  }
+}
