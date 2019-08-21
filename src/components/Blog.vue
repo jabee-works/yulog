@@ -6,11 +6,15 @@
 </template>
 
 <script>
+import markdown from "@/assets/markdown.md";
 export default {
   name: 'Blog',
   props: {
     msg: String
-  }
+  },
+  mounted() {
+
+  },
 }
 </script>
 
