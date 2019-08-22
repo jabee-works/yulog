@@ -1,16 +1,26 @@
 <template>
   <section>
     <h1>Blog</h1>
-
+    <div v-html="markdown"></div>
   </section>
 </template>
 
 <script>
-// import markdown from "@/assets/markdown.md";
+import markdown from "../assets/_posts/2019-08-22-json.md";
+import fs from "fs";
+
+const mdfiles = {};
+console.log(fs);
+
 export default {
   name: 'Blog',
   props: {
     msg: String
+  },
+  computed: {
+    markdown() {
+      return markdown;
+    }
   },
   mounted() {
 
