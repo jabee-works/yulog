@@ -7,10 +7,6 @@
 
 <script>
 import markdown from "../assets/_posts/2019-08-22-json.md";
-import fs from "fs";
-
-const mdfiles = {};
-console.log(fs);
 
 export default {
   name: 'Blog',
