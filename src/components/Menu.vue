@@ -1,11 +1,11 @@
 <template>
   <section>
-    <ul>
-      <li v-on:click="change('Home')"><span>Home</span></li>
-      <li v-on:click="change('Profile')"><span>Profile</span></li>
-      <li v-on:click="change('Photo')"><span>Photo</span></li>
-      <li v-on:click="change('Blog')"><span>Blog</span></li>
-      <li v-on:click="change('Contact')"><span>Contact</span></li>
+    <ul id="menu">
+      <li v-on:click="change('Home', 0)" v-bind:class="[ activetab === 0 ? 'active' : '' ]"><span>Home</span></li>
+      <li v-on:click="change('Profile', 1)" v-bind:class="[ activetab === 1 ? 'active' : '' ]"><span>Profile</span></li>
+      <li v-on:click="change('Gallery', 2)" v-bind:class="[ activetab === 2 ? 'active' : '' ]"><span>Gallery</span></li>
+      <li v-on:click="change('Blog', 3)" v-bind:class="[ activetab === 3 ? 'active' : '' ]"><span>Blog</span></li>
+      <!-- <li v-on:click="change('Contact')"><span>Contact</span></li> -->
     </ul>
     <div class="clear"></div>
   </section>
@@ -13,7 +13,7 @@
 
 <script>
 export default {
-  name: 'Sidebar',
+  name: 'SidMenuebar',
   props: {
     msg: String
   },
@@ -21,7 +21,8 @@ export default {
     return {
       scrollY: 0,
       fixedHeight: 135,
-      isActive: "Home"
+      tabName: "Home",
+      activetab: 0
     }
   },
   mounted() {
@@ -31,14 +32,15 @@ export default {
     handleScroll() {
         this.scrollY = window.scrollY;
         
-        document.getElementsByTagName("ul")[0].classList.remove("fixed");
+        document.getElementById("menu").classList.remove("fixed");
         if(this.scrollY > this.fixedHeight) {
-          document.getElementsByTagName("ul")[0].classList.add("fixed");
+          document.getElementById("menu").classList.add("fixed");
         }
     },
-    change(tab) {
-      this.isActive = tab;
-      this.$emit('changetab', this.isActive);
+    change(tab, activetab) {
+      this.tabName = tab;
+      this.activetab = activetab;
+      this.$emit('changetab', this.tabName);
     }
   }
 }
@@ -62,7 +64,7 @@ ul.fixed {
 ul li {
   list-style-type: none;
   display: inline-grid;
-  width: 20vw;
+  width: 25vw;
   text-align: center;
 }
 ul li span {
@@ -72,6 +74,9 @@ ul li span {
   border: 1px solid rgb(10, 10, 41);
   cursor: pointer;
   transition: .5s;
+}
+ul li.active span {
+  background: #2b79b9;
 }
 ul li span:hover {
   background: #2b79b9;

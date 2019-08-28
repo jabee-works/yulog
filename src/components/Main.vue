@@ -1,11 +1,11 @@
 <template>
   <main>
     <article>
-      <Sidebar @changetab="changetab" />
+      <Menu @changetab="changetab" />
       <section id="contents">
         <Home v-if="activeName === 'Home'" />
         <Profile v-if="activeName === 'Profile'" />
-        <Photo v-if="activeName === 'Photo'" />
+        <Gallery v-if="activeName === 'Gallery'" />
         <Blog v-if="activeName === 'Blog'" />
         <Contact v-if="activeName === 'Contact'" />
       </section>
@@ -15,10 +15,10 @@
 </template>
 
 <script>
-import Sidebar from './Sidebar.vue'
+import Menu from './Menu.vue'
 import Home from './Home.vue'
 import Profile from './Profile.vue'
-import Photo from './Photo.vue'
+import Gallery from './Gallery.vue'
 import Blog from './Blog.vue'
 import Contact from './Contact.vue'
 export default {
@@ -32,10 +32,10 @@ export default {
     }
   },
   components: {
-    Sidebar,
+    Menu,
     Home,
     Profile,
-    Photo,
+    Gallery,
     Blog,
     Contact
   },
@@ -51,9 +51,10 @@ export default {
 <style scoped>
 main {
   background-color:#574b75;
-  /* padding: 20px; */
+  padding: 0 0 20px 0;
   color: white;
   text-align: left;
+  min-height: 400px;
 }
 #contents {
   width: 1200px;
