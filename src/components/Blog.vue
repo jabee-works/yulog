@@ -19,7 +19,7 @@ export default {
   name: 'Blog',
   data: function() {
     return {
-      db: firebase.database(),
+      db: firebase.firestore(),
       blogData: []
     }
   },
@@ -36,26 +36,32 @@ export default {
   },
   mounted() {
     // firebaseからblogデータ取得
-    const ref = this.db.ref("flamelink/environments/production/content/newSchema/en-US");
+    const docRef = this.db.collection("fl_content");
     let blogData = this.blogData;
-
-    ref.once("value")
-    .then(function(snapshot) {
-      const postData = snapshot.val();
-      Object.keys(postData).forEach(id => {
-        // 日付処理
-        const getDate = new Date(postData[id].date);
-        const date = `${getDate.getFullYear()}年${getDate.getMonth() + 1}月${getDate.getDate()}日`;
-
-        const setData = {
-          title: postData[id].title,
-          date: date,
-          content: postData[id].content
-        }
-        blogData.push(setData);
-      });
-    });
     
+    docRef.get().then(function(querySnapshot) {
+        querySnapshot.forEach(function(doc) {
+            // doc.data() is never undefined for query doc snapshots
+            // console.log(doc.id, " => ", doc.data());
+
+            if(doc.data()._fl_meta_.schema !== "blog") {
+              return true;
+            }
+
+            const postData = doc.data();
+
+            // 日付処理
+            const getDate = new Date(postData.date);
+            const date = `${getDate.getFullYear()}年${getDate.getMonth() + 1}月${getDate.getDate()}日`;
+
+            const setData = {
+              title: postData.title,
+              date: date,
+              content: postData.content
+            }
+            blogData.push(setData);
+        });
+    });
   }
 }
 </script>
