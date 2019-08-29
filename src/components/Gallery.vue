@@ -1,7 +1,17 @@
 <template>
   <section>
     <h1>Gallery</h1>
-
+    <div id="gallery">
+      <div class="galleryData" v-for="(url, title) in destImg">
+        {{title}}
+        <ul>
+          <li v-for="(img, index) in url">
+            <img :src="img">
+   
+          </li>
+        </ul>
+      </div>
+    </div>
   </section>
 </template>
 
@@ -13,8 +23,10 @@ export default {
   data: function() {
     return {
       db: firebase.firestore(),
+      strage: firebase.storage(),
       gallerydata: [],
-      imgMax: 10
+      imgMax: 10,
+      destImg: {}
     }
   },
   props: {
@@ -23,8 +35,11 @@ export default {
   mounted() {
     // firebaseからgalleryデータ取得
     const docContentRef = this.db.collection("fl_content");
+    const docFileRef = this.db.collection("fl_files");
+    const strageRef = this.strage.ref("flamelink/media");
     let gallerydata = this.gallerydata;
     const imgMax = this.imgMax;
+    let destImg = this.destImg;
     
     docContentRef.get().then(function(querySnapshot) {
         querySnapshot.forEach(function(doc) {
@@ -35,33 +50,57 @@ export default {
               return true;
             }
 
+            destImg[doc.data().title] = [];
+
             const postData = doc.data();
             let imgData = [];
             
-            for(let i = 1; i < imgMax; i++) {
-              imgData.push(postData["image" + i]);
+            for(let i = 1; i <= imgMax; i++) {
+              if(!postData[`image${i}`][0]) {continue;}
+              
+              imgData.push(postData[`image${i}`][0].id);
             }
 
             const setData = {
               title: postData.title,
-              content: imgData
+              content: imgData,
+              filename:[]
             }
             gallerydata.push(setData);
         });
+    }).then(function() {
+      // fl_filesと紐つけ
+      docFileRef.get().then(function(querySnapshot) {
+          querySnapshot.forEach(function(doc) {
+            const id = doc.data().id;
+
+            gallerydata.forEach(data => {
+              if(data.content.indexOf(id) != -1){
+                data.filename.push(doc.data().file);
+              }
+            });
+            
+          });
+          
+          // mediaと紐つけ
+          gallerydata.forEach(data => {
+            data.filename.forEach(imgFile => {
+              strageRef.child(imgFile).getDownloadURL().then(function(url) {
+                // if(!destImg[data.title]) {
+                //   destImg[data.title] = [url];
+                //   return true;
+                // }
+                destImg[data.title].push(url);
+                
+              }).catch(function(error) {
+                // Handle any errors
+                console.log("timeout")
+              });             
+            });
+          });
+          
+      });      
     });
-
-    // fl_filesと紐つけ
-    const docFileRef = this.db.collection("fl_files");
-    docFileRef.get().then(function(querySnapshot) {
-        querySnapshot.forEach(function(doc) {
-          const id = doc.data().id;
-
-          // console.log(id);
-        });
-    });
-
-    // mediaと紐つけ
-    console.log(gallerydata);
     
   }
 }
@@ -73,5 +112,12 @@ h1 {
   font-size: 2em;
   margin: 0;
   padding-top: 1.5em;
+}
+#gallery li {
+  float: left;
+  list-style: none;
+}
+#gallery img {
+  width: 30%;
 }
 </style>
