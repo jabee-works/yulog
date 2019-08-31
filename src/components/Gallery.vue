@@ -5,8 +5,8 @@
       <div class="galleryData" v-for="(url, title) in destImg">
         {{title}}
         <ul>
-          <li v-for="(img, index) in url">
-            <img :src="img">
+          <!-- <li v-for="(img, index) in url">
+            <img :src="img"> -->
    
           </li>
         </ul>
@@ -91,6 +91,19 @@ export default {
                 //   return true;
                 // }
                 destImg[data.title].push(url);
+
+                // This can be downloaded directly:
+                var xhr = new XMLHttpRequest();
+                xhr.responseType = 'blob';
+                xhr.onload = function(event) {
+                  var blob = xhr.response;
+                };
+                xhr.open('GET', url);
+                xhr.send();
+
+                // Or inserted into an <img> element:
+                // var img = document.getElementById('myimg');
+                // img.src = url;
                 
               }).catch(function(error) {
                 // Handle any errors
