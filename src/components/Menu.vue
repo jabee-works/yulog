@@ -1,10 +1,10 @@
 <template>
   <section>
     <ul id="menu">
-      <li v-on:click="change('Home', 0)" v-bind:class="[ activetab === 0 ? 'active' : '' ]"><span>Home</span></li>
-      <li v-on:click="change('Profile', 1)" v-bind:class="[ activetab === 1 ? 'active' : '' ]"><span>Profile</span></li>
-      <li v-on:click="change('Gallery', 2)" v-bind:class="[ activetab === 2 ? 'active' : '' ]"><span>Gallery</span></li>
-      <li v-on:click="change('Blog', 3)" v-bind:class="[ activetab === 3 ? 'active' : '' ]"><span>Blog</span></li>
+      <a href="#home"><li id="menu-home" v-on:click="change('Home', 0)" v-bind:class="[ activetab === 0 ? 'active' : '' ]"><span>Home</span></li></a>
+      <a href="#profile"><li id="menu-profile" v-on:click="change('Profile', 1)" v-bind:class="[ activetab === 1 ? 'active' : '' ]"><span>Profile</span></li></a>
+      <a href="#gallery"><li id="menu-gallery" v-on:click="change('Gallery', 2)" v-bind:class="[ activetab === 2 ? 'active' : '' ]"><span>Gallery</span></li></a>
+      <a href="#blog"><li id="menu-blog" v-on:click="change('Blog', 3)" v-bind:class="[ activetab === 3 ? 'active' : '' ]"><span>Blog</span></li></a>
       <!-- <li v-on:click="change('Contact')"><span>Contact</span></li> -->
     </ul>
     <div class="clear"></div>
@@ -27,6 +27,9 @@ export default {
   },
   mounted() {
     window.addEventListener('scroll', this.handleScroll);
+
+    let id = location.hash.slice(1);
+    document.getElementById("menu-" + id).click();
   },
   methods: {
     handleScroll() {
@@ -48,6 +51,9 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+a {
+  text-decoration: none;
+}
 ul {
   padding: 0;
   margin: 0;

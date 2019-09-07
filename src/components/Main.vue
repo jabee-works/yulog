@@ -43,7 +43,7 @@ export default {
     changetab: function(name) {
       this.activeName = name;
     }
-  },
+  }
 }
 </script>
 

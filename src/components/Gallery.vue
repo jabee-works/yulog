@@ -1,7 +1,7 @@
 <template>
   <section>
     <h1>Gallery</h1>
-    <div id="gallery">
+    <div class="gallery">
       <div class="galleryData">
         <div v-for="data in gallerydata">
           <h3>{{data.title}}</h3>
@@ -107,12 +107,12 @@ h1 {
   margin: 0;
   padding-top: 1.5em;
 }
-#gallery li {
+.gallery li {
   /* float: left; */
   display: contents;
   list-style: none;
 }
-#gallery img {
+.gallery img {
   /* width: 30%; */
   height: 20rem;
   margin-right: 10px;

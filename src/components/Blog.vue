@@ -1,7 +1,7 @@
 <template>
   <section>
     <h1>Blog</h1>
-    <div id="blog">
+    <div class="blog">
       <div class="blogData" v-for="(data, index) in blogData">
         <h2>{{data.title}}</h2>
         <div>{{data.date}}</div>
@@ -83,7 +83,7 @@ h1 {
   padding-top: 1.5em;
 }
 
-#blog .blogData {
+.blog .blogData {
   background: white;
   color: #574b75;
   padding: 0 20px 20px;
