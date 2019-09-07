@@ -117,4 +117,8 @@ h1 {
   height: 20rem;
   margin-right: 10px;
 }
+
+@media (max-width:768px) {
+
+}
 </style>

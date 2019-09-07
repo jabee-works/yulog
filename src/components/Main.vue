@@ -60,5 +60,11 @@ main {
   width: 1200px;
   margin: 0 auto;
 }
-
+@media (max-width:768px) {
+#contents {
+  width: auto;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+}
 </style>
