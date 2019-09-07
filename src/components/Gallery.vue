@@ -2,21 +2,22 @@
   <section>
     <h1>Gallery</h1>
     <div id="gallery">
-      <div class="galleryData" v-for="(url, title) in destImg">
-        {{title}}
-        <ul>
-          <!-- <li v-for="(img, index) in url">
-            <img :src="img"> -->
-   
-          </li>
-        </ul>
+      <div class="galleryData">
+        <div v-for="data in gallerydata">
+          <h3>{{data.title}}</h3>
+          <ul>
+            <li v-for="url in data.url">
+              <img :src="url">
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   </section>
 </template>
 
 <script>
-import firebase from 'firebase'
+import firebase, { functions } from 'firebase'
 
 export default {
   name: 'Gallery',
@@ -26,7 +27,8 @@ export default {
       strage: firebase.storage(),
       gallerydata: [],
       imgMax: 10,
-      destImg: {}
+      urls: [],
+      destData: []
     }
   },
   props: {
@@ -39,82 +41,61 @@ export default {
     const strageRef = this.strage.ref("flamelink/media");
     let gallerydata = this.gallerydata;
     const imgMax = this.imgMax;
-    let destImg = this.destImg;
-    
+    let urls = this.urls;
+
+    // fl_contentからデータ取得
     docContentRef.get().then(function(querySnapshot) {
-        querySnapshot.forEach(function(doc) {
-            // doc.data() is never undefined for query doc snapshots
-            // console.log(doc.id, " => ", doc.data());
+      querySnapshot.forEach(function(doc) {
+        let imgId = [];
+        if(doc.data()._fl_meta_.schema !== "gallery") { return true; }
 
-            if(doc.data()._fl_meta_.schema !== "gallery") {
-              return true;
-            }
-
-            destImg[doc.data().title] = [];
-
-            const postData = doc.data();
-            let imgData = [];
-            
-            for(let i = 1; i <= imgMax; i++) {
-              if(!postData[`image${i}`][0]) {continue;}
-              
-              imgData.push(postData[`image${i}`][0].id);
-            }
-
-            const setData = {
-              title: postData.title,
-              content: imgData,
-              filename:[]
-            }
-            gallerydata.push(setData);
+        for(let i = 1; i <= imgMax; i++) {
+          if(!doc.data()[`image${i}`]) { continue; }
+          if(!doc.data()[`image${i}`].length) { continue; }
+          if(!doc.data()[`image${i}`][0]) { continue; }
+          // console.log(doc.data()[`image${i}`][0].id);
+          imgId.push(doc.data()[`image${i}`][0].id);
+        }
+        
+        gallerydata.push({
+          title: doc.data().title,
+          imgData: imgId,
+          file: [],
+          url: []
         });
+      });
     }).then(function() {
-      // fl_filesと紐つけ
+      // fl_content -> fl_filesに紐つけ
       docFileRef.get().then(function(querySnapshot) {
-          querySnapshot.forEach(function(doc) {
-            const id = doc.data().id;
-
-            gallerydata.forEach(data => {
-              if(data.content.indexOf(id) != -1){
-                data.filename.push(doc.data().file);
+        querySnapshot.forEach(function(doc) {
+          const fileId = doc.data().id;
+          gallerydata.forEach(gallery => {
+            let imgFile = [];
+            gallery.imgData.forEach(imgData => {
+              if(imgData === fileId) {
+                gallery.file.push(doc.data().file);
               }
             });
-            
           });
-          
-          // mediaと紐つけ
-          gallerydata.forEach(data => {
-            data.filename.forEach(imgFile => {
-              strageRef.child(imgFile).getDownloadURL().then(function(url) {
-                // if(!destImg[data.title]) {
-                //   destImg[data.title] = [url];
-                //   return true;
-                // }
-                destImg[data.title].push(url);
+        });
 
-                // This can be downloaded directly:
-                var xhr = new XMLHttpRequest();
-                xhr.responseType = 'blob';
-                xhr.onload = function(event) {
-                  var blob = xhr.response;
-                };
-                xhr.open('GET', url);
-                xhr.send();
+      }).then(function() {
+        // fl_file -> strage
+        // URL取得
+        gallerydata.forEach(gallery => {
+          gallery.file.forEach(file => {
+            strageRef.child(file).getDownloadURL().then(function(url) {
+              gallery.url.push(url);
+              urls.push(url);
 
-                // Or inserted into an <img> element:
-                // var img = document.getElementById('myimg');
-                // img.src = url;
-                
-              }).catch(function(error) {
-                // Handle any errors
-                console.log("timeout")
-              });             
+            }).catch(function(error) {
+              // Handle any errors
+              console.log("timeout")
             });
           });
-          
+        });
       });      
     });
-    
   }
 }
 </script>
@@ -127,10 +108,12 @@ h1 {
   padding-top: 1.5em;
 }
 #gallery li {
-  float: left;
+  /* float: left; */
+  display: contents;
   list-style: none;
 }
 #gallery img {
   width: 30%;
+  margin-right: 10px;
 }
 </style>
