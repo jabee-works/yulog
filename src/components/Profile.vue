@@ -60,5 +60,15 @@ dd {
 .twitter img {
   width: 30px;
 }
-
+@media (max-width:768px) {
+.photo {
+  display: block;
+}
+.photo img {
+  width: 100%;
+}
+.profile {
+  font-size: 70%;
+}
+}
 </style>
