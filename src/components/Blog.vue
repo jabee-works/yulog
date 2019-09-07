@@ -56,10 +56,16 @@ export default {
 
             const setData = {
               title: postData.title,
+              defDate: getDate,
               date: date,
               content: postData.content
             }
             blogData.push(setData);
+        });
+
+        // ブラグデータのソート
+        blogData.sort(function(a, b) {
+          return b.defDate - a.defDate;
         });
     });
   }
