@@ -121,6 +121,7 @@ h1 {
 @media (max-width:768px) {
 .gallery img {
   max-width: 100%;
+  height: auto;
 }
 }
 </style>
