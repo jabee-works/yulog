@@ -113,7 +113,8 @@ h1 {
   list-style: none;
 }
 #gallery img {
-  width: 30%;
+  /* width: 30%; */
+  height: 20rem;
   margin-right: 10px;
 }
 </style>
