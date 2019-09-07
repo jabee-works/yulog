@@ -13,7 +13,8 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 header {
-  background:url(../assets/header.jpeg) 100%;
+  /* background:url(../assets/header.jpeg) 100%; */
+  background: black;
 }
 
 h1 {
