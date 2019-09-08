@@ -1,6 +1,6 @@
 <template>
   <footer id="footer">
-
+    &copy;2019 Jabee Works
   </footer>
 </template>
 
@@ -14,6 +14,8 @@ export default {
 <style scoped>
 footer {
   background-color: black;
-  height: 10em;
+  color: white;
+  font-weight: bold;
+  padding: 20px;
 }
 </style>
