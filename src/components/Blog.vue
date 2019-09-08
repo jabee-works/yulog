@@ -12,7 +12,6 @@
 </template>
 
 <script>
-// import markdown from "../assets/_posts/2019-08-22-json.md";
 import firebase from 'firebase'
 
 export default {
@@ -74,6 +73,9 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+section {
+  font-family: "游明朝", YuMincho, "ヒラギノ明朝 ProN W3", "Hiragino Mincho ProN", "HG明朝E", "ＭＳ Ｐ明朝", "ＭＳ 明朝", serif;
+}
 .loader {
   position: absolute;
   top: 0;
