@@ -8,18 +8,25 @@
         <div v-html="data.content"></div>
       </div>
     </div>
+    <div class="pagearea">
+      <a v-for="page in pages">
+        {{page}}
+      </a>
+    </div>
   </section>
 </template>
 
 <script>
-import firebase from 'firebase'
+import firebase, { functions } from 'firebase'
 
 export default {
   name: 'Blog',
   data: function() {
     return {
       db: firebase.firestore(),
-      blogData: []
+      blogData: [],
+      pageMax: 5,
+      pages: []
     }
   },
   props: {
@@ -37,6 +44,8 @@ export default {
     // firebaseからblogデータ取得
     const docRef = this.db.collection("fl_content");
     let blogData = this.blogData;
+    const pageMax = this.pageMax;
+    let pages = this.pages;
     
     docRef.get().then(function(querySnapshot) {
         querySnapshot.forEach(function(doc) {
@@ -66,6 +75,13 @@ export default {
         blogData.sort(function(a, b) {
           return b.defDate - a.defDate;
         });
+    }).then(function() {
+      // ページ数取得
+      const getPage = Math.floor(((blogData.length - 1) / pageMax)) + 1;
+
+      for(let i = 1; i <= getPage; i++) {
+        pages.push(i);
+      }
     });
   }
 }
@@ -97,5 +113,16 @@ h1 {
   padding: 0 20px 20px;
   margin: 20px;
   border: 1px solid;
+}
+
+.pagearea {
+  text-align: center;
+}
+
+.pagearea a {
+  border: 1px solid;
+  border-radius: 10px;
+  padding: 10px;
+  background: #9785c5;
 }
 </style>
