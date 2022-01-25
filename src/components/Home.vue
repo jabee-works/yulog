@@ -1,6 +1,6 @@
 <template>
   <section>
-    <h1>楽しくない人生など無価値である。</h1>
+    <h1>楽しく生きる人のページ</h1>
     <div>
       <img src="../assets/top.jpg" alt="top">
     </div>
